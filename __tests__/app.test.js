@@ -52,4 +52,14 @@ describe('fullstackapp-be routes', () => {
     });
   });
 
+  it('returns a deleted note after delete', async() => {
+    const notes = await Note.findAll();
+    const savedNote = notes[0];
+
+    const response = await request(app)
+      .delete(`/api/v1/notes/${savedNote.id}`);
+
+    expect(response.body).toEqual(savedNote);
+  });
+
 });

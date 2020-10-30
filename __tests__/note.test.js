@@ -49,4 +49,14 @@ describe('Note class', () => {
       note: 'hello2'
     });
   });
+
+  it('should delete from notes', async() => {
+    const newNote = await Note.insert({
+      title: 'hello',
+      note: 'hello'
+    });
+    const deletedNote = await Note.delete(newNote.id);
+    expect(deletedNote).toEqual(newNote);
+    
+  });
 });
