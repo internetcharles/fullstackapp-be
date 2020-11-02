@@ -27,6 +27,16 @@ describe('Note class', () => {
     expect(allNotes.length).toBeGreaterThan(0);
   });
 
+  it('should find an actor by id with GET', async() => {
+    const note = await Note.insert({
+      title: 'hello',
+      note: 'hello'
+    });
+
+    const noteById = (await Note.findById(note.id));
+    expect(noteById).toEqual([note]);
+  });
+
   it('should update note via PUT', async() => {
     const newNote = await Note.insert({
       title: 'hello',
@@ -44,7 +54,7 @@ describe('Note class', () => {
     `, [updatedNote.id]);
 
     expect(rows[0]).toEqual({
-      id: '2',
+      id: '3',
       title: 'hello2',
       note: 'hello2'
     });

@@ -35,6 +35,17 @@ describe('fullstackapp-be routes', () => {
         }]));
   });
 
+  it('gets note by id via GET', () => {
+    return request(app)
+      .get('/api/v1/notes/1')
+      .then(res => expect(res.body)
+        .toEqual([{
+          id: expect.any(String),
+          title: 'hello',
+          note: 'hello'
+        }]));
+  });
+
   it('returns an updated note after update', async() => {
     const notes = await Note.findAll();
     const savedNote = notes[0];
